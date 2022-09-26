@@ -8,12 +8,22 @@
 # and the user has guessed the letter "o", the output should look like this: _ _ _ _ o    _ o _ _ _
 # check_letter(): checks to see if the letter selected by the user matches a letter in the phrase.
 # check_complete(): checks to see if the whole phrase has been guessed.
+import game
+
 class Phrase:
 
-    def __init__(self, phrase):
+    def __init__(self):
         self.phrase = None
 
     def display(self):
-        return self.phrase
+        display = []
+        for letter in game.active_phrase:
+            for correct
 
-    
+
+if __name__ == '__main__':
+    game = game.Game()
+    phrase = Phrase()
+    game.get_random_phrase()
+    phrase.display()
+
