@@ -17,8 +17,22 @@ class Phrase:
 
     def display(self):
         display = []
-        for letter in game.active_phrase:
-            for correct
+        for charachter in game.active_phrase:
+            if str.isalpha(charachter):
+                display.append('_')
+            else: display.append(' ')
+        dex = -1
+        ''.join(display)
+        print("1sie " + display)
+        for charachter in display:
+            dex += 1
+            for guess in game.guesses:
+                if guess == game.active_phrase[dex]:
+                    display.replace('_', guess, 1)
+                else:
+                    pass
+        return display
+
 
 
 if __name__ == '__main__':
@@ -26,4 +40,6 @@ if __name__ == '__main__':
     phrase = Phrase()
     game.get_random_phrase()
     phrase.display()
-
+    game.guesses = ['a', 'e', 'i', 'o', 'u']
+    print(game.active_phrase)
+    print(phrase.display())
