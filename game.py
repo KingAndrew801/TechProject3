@@ -1,15 +1,5 @@
 # Create your Game class logic in here.
 # Create the Game class in the game.py file
-# The class should include an initializer or def __init__ method that sets the following attributes:
-#
-# missed: used to track the number of incorrect guesses by the user. The initial value is 0 since no
-# guesses have been made at the start of the game.
-# phrases: a list of five Phrase objects to use with the game. A phrase should only include letters
-# and spaces -- no numbers, puntuation or other special characters.
-# active_phrase: This is the Phrase object that's currently in play. The initial value will be None.
-# Within the start() method, this property will be set to the Phrase object returned from a call to the
-# get_random_phrase() method.
-# guesses: This is a list that contains the letters guessed by the user.
 # The class should also have these methods:
 #
 # start(): Calls the welcome method, creates the game loop, calls the get_guess method, adds the
@@ -25,6 +15,7 @@
 # if a win/loss happens after the player runs out of turns or the phrase is completely guessed.
 import random
 import string
+import phrase
 
 class Game:
 
@@ -56,8 +47,21 @@ Guess letters to complete the hidden phrase!''')
                 print(f'{err}')
         return current_guess
 
+    def start(self):
+        self.get_random_phrase()
+        print(self.active_phrase)
+        phrase.check_letter()
+        phrase.complete()
+        while phrase.complete == False:
+            phrase.check_letter()
+            phrase.complete()
+
+
+
+
+
 if __name__ == '__main__':
     game = Game()
-    game.get_random_phrase()
-    game.get_guess()
+    phrase = phrase.Phrase()
+    game.start()
 
