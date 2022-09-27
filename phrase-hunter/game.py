@@ -1,20 +1,5 @@
-# Create your Game class logic in here.
-# Create the Game class in the game.py file
-# The class should also have these methods:
-#
-# start(): Calls the welcome method, creates the game loop, calls the get_guess method, adds the
-# user's guess to guesses, increments the number of missed by one if the guess is incorrect, calls
-# the game_over method.
-# get_random_phrase(): this method randomly retrieves one of the phrases stored in the phrases list
-# and returns it.
-# welcome(): this method prints a friendly welcome message to the user at the start of the game
-# get_guess(): this method gets the guess from a user and records it in the guesses attribute
-# game_over(): this method displays a friendly win or loss message and ends the game.
-# The Game instance might be responsible for things like: starting the game loop, getting player's
-# input() guesses to pass to a Phrase object to perform its responsibilities against, determining
-# if a win/loss happens after the player runs out of turns or the phrase is completely guessed.
+
 import random
-import string
 import phrase
 
 class Game:
@@ -35,33 +20,61 @@ Guess letters to complete the hidden phrase!''')
 
     def get_guess(self):
         guessing = True
+        print(self.active_phrase.display(self.guesses))
         while guessing:
             try:
                 current_guess = input("Enter your next guess here:   ")
-                if current_guess.isalpha():
+                if current_guess.isalpha() and len(current_guess) == 1:
                     self.guesses.append(current_guess)
+                    if self.active_phrase.check_letter(current_guess):
+                        print('That is correct! \n')
+                    else:
+                        self.missed += 1
+                        print ('Sorry, please try again. \n')
                     guessing = False
                 else:
-                    raise ValueError('You can only guess letters A-Z. Try again.')
+                    raise ValueError('You can only guess single letters A-Z. Try again. \n')
             except ValueError as err:
                 print(f'{err}')
         return current_guess
 
+    def game_over(self):
+        if self.missed >= 5:
+            print("You LOSE, sir. Good DAY!")
+            return True
+        else:
+            return False
+
     def start(self):
-        self.get_random_phrase()
-        print(self.active_phrase)
-        phrase.check_letter()
-        phrase.complete()
-        while phrase.complete == False:
-            phrase.check_letter()
-            phrase.complete()
-
-
+        playing = True
+        while playing == True:
+            self.get_random_phrase()
+            self.welcome()
+            while self.active_phrase.complete(self.guesses) == False and self.game_over() == False:
+                self.get_guess()
+            trying = True
+            while trying:
+                try:
+                    again = input("Do you want to play again? Select Y/N   ").lower()
+                    print('--------------------------------\n')
+                    if again == 'y' or 'n':
+                        if again == 'y':
+                            self.guesses = []
+                            self.missed = 0
+                            self.get_random_phrase()
+                            trying = False
+                        if again =='n':
+                            print('Alright then, thanks for playing!')
+                            playing = False
+                            trying = False
+                    else:
+                        raise ValueError('You have to select Y or N\n')
+                except ValueError as err:
+                    print('{err}')
 
 
 
 if __name__ == '__main__':
     game = Game()
-    phrase = phrase.Phrase()
     game.start()
 

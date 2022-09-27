@@ -11,13 +11,16 @@
 # guessed the letter "o", the output should look like this: _ _ _ _ o    _ o _ _ _
 # check_letter(): checks to see if the letter selected by the user matches a letter in the phrase.
 # check_complete(): checks to see if the whole phrase has been guessed.
-import game
+
 
 class Phrase:
     def __init__(self, phrase):
         self.phrase = phrase
 
-    def display(self):
+    def __str__(self):
+        return self.phrase
+
+    def display(self, guesses):
         display = []
         for charachter in self.phrase:
             if str.isalpha(charachter):
@@ -26,36 +29,38 @@ class Phrase:
         dex = -1
         for charachter in display:
             dex += 1
-            for guess in game.guesses:
-                if guess == game.active_phrase[dex]:
+            for guess in guesses:
+                if guess == self.phrase[dex]:
                     display[dex] = guess
         return ''.join(display)
 
-    def check_letter(self):
+    def check_letter(self, guess):
         correct = None
-        current = self.display()
-        game.get_guess()
-        new = self.display()
-        if current == new:
-            correct = False
-        else: correct = True
+        for letter in self.phrase:
+            if guess == letter:
+                correct = True
+                break
+            else: correct = False
         return correct
 
-    def complete(self):
+    def complete(self, guesses):
         complete = False
-        for char in self.display():
+        results = []
+        for char in self.display(guesses):
             if char == '_':
                 complete = False
+                results.append(complete)
                 break
-            else:
-                complete = True
+            if char == str.isalpha(char):
+                results.append(complete)
+        if all(results):
+            print("NICE BRO! You won!")
+            complete = True
         return complete
 
 
 
 if __name__ == '__main__':
-    game = game.Game()
     phrase = Phrase()
-    game.get_random_phrase()
     phrase.display()
 

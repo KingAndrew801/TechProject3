@@ -1,3 +1,6 @@
-import game
-import phrase
+from phrase-hunter import game
+
+
+
+
 
