@@ -31,7 +31,7 @@ class Game:
 Guess letters to complete the hidden phrase!''')
 
     def get_random_phrase(self):
-        self.active_phrase = random.choice(self.phrases)
+        self.active_phrase = phrase.Phrase(random.choice(self.phrases))
 
     def get_guess(self):
         guessing = True
