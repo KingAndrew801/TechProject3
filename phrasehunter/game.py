@@ -8,7 +8,7 @@ class Game:
         self.missed = 0
         self.phrases = ['make hay while the sun shines', 'easy does it', 'keep it simple stupid',
                    'another day another dollar', 'the strong survive and the weak are consumed']
-        self.active_phrase: None
+        self.active_phrase = None
         self.guesses = []
 
     def welcome(self):
