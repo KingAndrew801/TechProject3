@@ -1,9 +1,8 @@
 
 import random
-from phrasehunter import phrase
+from phrasehunter.phrase import Phrase
 
 class Game:
-
     def __init__(self):
         self.missed = 0
         self.phrases = ['make hay while the sun shines', 'easy does it', 'keep it simple stupid',
@@ -16,7 +15,7 @@ class Game:
 Guess letters to complete the hidden phrase!''')
 
     def get_random_phrase(self):
-        self.active_phrase = phrase.Phrase(random.choice(self.phrases))
+        self.active_phrase = Phrase(random.choice(self.phrases))
 
     def get_guess(self):
         guessing = True
