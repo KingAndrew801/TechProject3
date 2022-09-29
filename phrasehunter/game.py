@@ -5,8 +5,7 @@ from phrasehunter.phrase import Phrase
 class Game:
     def __init__(self):
         self.missed = 0
-        self.phrases = ['make hay while the sun shines', 'easy does it', 'keep it simple stupid',
-                   'another day another dollar', 'the strong survive and the weak are consumed']
+        self.phrases = []
         self.active_phrase = None
         self.guesses = []
 
@@ -15,7 +14,11 @@ class Game:
 Guess letters to complete the hidden phrase!''')
 
     def get_random_phrase(self):
-        self.active_phrase = Phrase(random.choice(self.phrases))
+        phraselist = ['make hay while the sun shines', 'easy does it', 'keep it simple stupid',
+                   'another day another dollar', 'the strong survive and the weak are consumed']
+        for phrase in phraselist:
+            self.phrases.append(Phrase(phrase))
+        self.active_phrase = random.choice(self.phrases)
 
     def get_guess(self):
         guessing = True
@@ -29,7 +32,7 @@ Guess letters to complete the hidden phrase!''')
                         print('That is correct! \n')
                     else:
                         self.missed += 1
-                        print ('Sorry, please try again. \n')
+                        print (f"That letter is not in the phrase. You've missed {self.missed} times!\n")
                     guessing = False
                 else:
                     raise ValueError('You can only guess single letters A-Z. Try again. \n')
