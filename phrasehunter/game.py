@@ -1,6 +1,6 @@
 
 import random
-import phrase
+from phrasehunter import phrase
 
 class Game:
 
