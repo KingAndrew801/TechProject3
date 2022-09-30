@@ -5,7 +5,8 @@ from phrasehunter.phrase import Phrase
 class Game:
     def __init__(self):
         self.missed = 0
-        self.phrases = []
+        self.phrases = [Phrase('make hay while the sun shines'), Phrase('easy does it'), Phrase('keep it simple stupid'),
+                   Phrase('another day another dollar'), Phrase('the strong survive and the weak are consumed')]
         self.active_phrase = None
         self.guesses = []
 
@@ -14,10 +15,6 @@ class Game:
 Guess letters to complete the hidden phrase!''')
 
     def get_random_phrase(self):
-        phraselist = ['make hay while the sun shines', 'easy does it', 'keep it simple stupid',
-                   'another day another dollar', 'the strong survive and the weak are consumed']
-        for phrase in phraselist:
-            self.phrases.append(Phrase(phrase))
         self.active_phrase = random.choice(self.phrases)
 
     def get_guess(self):
